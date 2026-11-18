@@ -27,4 +27,4 @@ python saturate.py
 ```
 To deploy:
 
-Copy the `index.html` and `games.json` into a new folder or repo so that they're the only files inside. Then deploy it statically over any platform. It is optional but recommended to delete the `id` and `votes` field from `games.json` before publishing.
+Copy the `index.html` and `games.json` into a new folder or repo so that they're the only files inside. Then at the end of the html file, there's a fetch() to `live.alimad.co`, it is there to track visits. You can remove it or rename the `?app=haven-lahore-wall` query to `?app=haven-[CITY]-wall`. You can view the visits at https://live.alimad.co/stats/view?app=haven-lahore-wall Then deploy it statically over any platform. It is optional but recommended to delete the `id` and `votes` field from `games.json` before publishing.

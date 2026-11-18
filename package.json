@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "vm": "^0.1.0"
+  },
+  "name": "podium-fetch",
+  "private": false,
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

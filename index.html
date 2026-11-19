@@ -1,16 +1,15 @@
 <!DOCTYPE html>
+
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Haven Lahore Wall</title>
-    <link rel="icon" type="image/png" href="https://haven.hackclub.com/favicon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&family=Jua&display=swap" rel="stylesheet" />
-
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Haven Lahore Wall</title>
+<link href="https://haven.hackclub.com/images/hedgehog.webp" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&amp;family=Jua&amp;display=swap" rel="stylesheet"/>
+<style>
         :root {
             --haven-green: #588b43;
             --haven-green-deep: #2b4d1d;
@@ -313,30 +312,24 @@
         }
     </style>
 </head>
-
 <body>
-
-    <img src="https://haven.hackclub.com/images/flowers-top-l.webp" alt="" aria-hidden="true" class="corner-flower flower-tl" />
-    <img src="https://haven.hackclub.com/images/flowers-top-r.webp" alt="" aria-hidden="true" class="corner-flower flower-tr" />
-    <img src="https://haven.hackclub.com/images/flowers-bottom-l.webp" alt="" aria-hidden="true" class="corner-flower flower-bl" />
-    <img src="https://haven.hackclub.com/images/flowers-bottom-r.webp" alt="" aria-hidden="true" class="corner-flower flower-br" />
-    <img src="https://haven.hackclub.com/images/hedgehog.webp" alt="" aria-hidden="true" class="hedgehog" />
-
-    <header>
-        <a href="https://haven.hackclub.com" aria-label="Hack Club Haven Home">
-            <img src="https://haven.hackclub.com/images/logo.webp" alt="Hack Club Haven" class="logo" />
-        </a>
-        <h1>Haven Lahore Wall</h1>
-        <p class="subtitle">83 students particopated out of which 71 made a total of 36 games.</p>
-    </header>
-
-    <main>
-        <div id="games-grid" class="games-grid"></div>
-    </main>
-
-    <p style="text-align: center; padding-bottom: 5rem; color: var(--haven-orange-deep);">Made with &lt;3 and :3c by your local organizers</p>
-
-    <script>
+<img alt="" aria-hidden="true" class="corner-flower flower-tl" src="assets/haven.hackclub.com/images/steps/flowers-top-l.webp"/>
+<img alt="" aria-hidden="true" class="corner-flower flower-tr" src="assets/haven.hackclub.com/images/steps/flowers-top-r.webp"/>
+<img alt="" aria-hidden="true" class="corner-flower flower-bl" src="assets/haven.hackclub.com/images/steps/flowers-bottom-l.webp"/>
+<img alt="" aria-hidden="true" class="corner-flower flower-br" src="assets/haven.hackclub.com/images/steps/flowers-bottom-r.webp"/>
+<img alt="" aria-hidden="true" class="hedgehog" src="assets/haven.hackclub.com/images/hedgehog.webp"/>
+<header>
+<a aria-label="Hack Club Haven Home" href="https://haven.hackclub.com">
+<img alt="Hack Club Haven" class="logo" src="assets/haven.hackclub.com/images/logo.webp"/>
+</a>
+<h1>Haven Lahore Wall</h1>
+<p class="subtitle">83 students particopated out of which 71 made a total of 36 games.</p>
+</header>
+<main>
+<div class="games-grid" id="games-grid"></div>
+</main>
+<p style="text-align: center; padding-bottom: 5rem; color: var(--haven-orange-deep);">Made with &lt;3 and :3c by your local organizers</p>
+<script>
         function formatMemberName(fullName) {
             return fullName.trim().replace(/\s+[A-Za-z]\.?$/, '');
         }
@@ -425,5 +418,4 @@
         fetch("https://live.alimad.co/ping?app=haven-lahore-wall")
     </script>
 </body>
-
 </html>

@@ -8,9 +8,9 @@ import vm from 'node:vm'
 /* GO to `podium.hackclub.com/haven-[CITY]/poc`, open inspector, refresh, click on the `/poc` request,
 then copy the exact contents of the `Cookie` inside `Request Headers` down below, then run this script
 */
-const COOKIE = ''
+const COOKIE = '' // paste the Cookie here
 
-const POC_URL = 'https://podium.hackclub.com/haven-lahore/poc'
+const POC_URL = 'https://podium.hackclub.com/haven-[CITY]/poc' // add your city name
 const BASE_URL = `${POC_URL}/games`
 const DELAY_MS = 300
 

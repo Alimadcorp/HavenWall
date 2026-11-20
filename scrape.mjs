@@ -234,7 +234,7 @@ async function main() {
   }
 
   await fs.writeFile('games.json', JSON.stringify(output, null, 2), 'utf8')
-  console.log(`\nSaved ${finalCleanResults.length} games (with ${checkedInCount} attendees) to games.json :P`)
+  console.log(`\nSaved ${finalCleanResults.length} games to games.json :P`)
 
   if (errors.length > 0) {
     await fs.writeFile('errors.json', JSON.stringify(errors, null, 2), 'utf8')

@@ -115,16 +115,20 @@ function extractSvelteKitData(html) {
   return vm.runInNewContext(`(${str.slice(0, endIndex + 1)})`, Object.create(null))
 }
 
-async function fetchGamesList(pocUrl, headers) {
+async function fetchPocData(pocUrl, headers) {
   const res = await fetch(pocUrl, { headers })
-  if (!res.ok) throw new Error(`HTTP ${res.status} while fetching games list from ${pocUrl}`)
+  if (!res.ok) throw new Error(`HTTP ${res.status} while fetching data from ${pocUrl}`)
 
   const html = await res.text()
   const dataNodes = extractSvelteKitData(html)
-  const gamesList = dataNodes[2]?.data?.results
+  const pageData = dataNodes[2]?.data
+  const gamesList = pageData?.results
+  const roster = pageData?.roster || []
 
   if (!Array.isArray(gamesList)) throw new Error('Could not find results array in SvelteKit data.')
-  return gamesList
+  
+  const checkedInCount = roster.filter(person => person.checkedIn === true).length
+  return { gamesList, checkedInCount }
 }
 
 async function fetchGameDetailsAndLocalize(baseGame, baseUrl, headers) {
@@ -168,7 +172,6 @@ async function main() {
   while (!city) {
     city = (await prompt('City slug cannot be empty. Please enter city slug: ')).toLowerCase();
   }
-  let attendees;
 
   console.log('\n--- How to retrieve your Cookie ---')
   console.log(`1. Go to https://podium.hackclub.com/haven-${city}/poc`)
@@ -190,18 +193,18 @@ async function main() {
     Accept: 'text/html,application/xhtml+xml'
   }
 
-  console.log('\nFetching games list...')
-  let gamesList
+  console.log('\nFetching event & games data...')
+  let gamesList, checkedInCount
   try {
-    gamesList = await fetchGamesList(POC_URL, REQUEST_HEADERS)
+    ({ gamesList, checkedInCount } = await fetchPocData(POC_URL, REQUEST_HEADERS))
   } catch (err) {
-    console.error(`Failed to fetch initial games list: ${err.message}`)
+    console.error(`Failed to fetch initial event data: ${err.message}`)
     return
   }
 
   const results = new Array(gamesList.length)
   const errors = []
-  console.log(`Starting download for ${gamesList.length} games...\n`)
+  console.log(`Found ${checkedInCount} checked-in attendees. Starting download for ${gamesList.length} games...\n`)
 
   for (let i = 0; i < gamesList.length; i += CONCURRENCY_LIMIT) {
     const chunk = gamesList.slice(i, i + CONCURRENCY_LIMIT)
@@ -220,18 +223,18 @@ async function main() {
   }
 
   const finalCleanResults = results.filter(Boolean);
-  attendees = finalCleanResults.length;
   const output = {
     games: finalCleanResults,
     event: {
       slug: city,
-      attendees,
+      attendees: checkedInCount,
       shippers: finalCleanResults.reduce((acc, game) => acc + game.teamMembers.length, 0),
-      games: finalCleanResults.length    }
+      games: finalCleanResults.length
+    }
   }
 
   await fs.writeFile('games.json', JSON.stringify(output, null, 2), 'utf8')
-  console.log(`\nSaved ${finalCleanResults.length} games to games.json :P`)
+  console.log(`\nSaved ${finalCleanResults.length} games (with ${checkedInCount} attendees) to games.json :P`)
 
   if (errors.length > 0) {
     await fs.writeFile('errors.json', JSON.stringify(errors, null, 2), 'utf8')
